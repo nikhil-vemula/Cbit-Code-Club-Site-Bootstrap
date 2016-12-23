@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Cbit Code Club</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="./css/style.css">
+        <link rel="stylesheet" type="text/css" href="./css/reload.css">
+        <script src="./js/bootstrap.min.js"></script>
+        <script src="./js/jquery-3.1.1.min.js"></script>
+        <script src="./js/script.js" ></script>
+
+        <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
+        <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyDyQpXUcCDBtBvfGBpVDCeJa_eAQ2x-LTg",
+            authDomain: "cccnotify-21a8d.firebaseapp.com",
+            databaseURL: "https://cccnotify-21a8d.firebaseio.com",
+            storageBucket: "cccnotify-21a8d.appspot.com",
+            messagingSenderId: "1098197702761"
+        };
+        firebase.initializeApp(config);
+        var database = firebase.database();
+        </script>
+    </head>
+    <body>   
+        <div class="hspacer"></div>    
+        <div class="container-fluid header row-lg-center">
+            <nav class="navbar navbar-fixed-top navbar-dark ">
+            <ul class="nav navbar-nav" id="nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="./index.html">Home<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./news.html">News</a>
+                </li>
+            </ul>
+            </nav>
+        </div>
+        <div class="container">
+            <div class="card col-xs-12" >
+                <div class="card-header center">
+                        Notifications
+                </div>
+                <div class="card-block">
+                    <div id="loading" class='uil-reload-css center' style='-webkit-transform:scale(0.4)'><div></div></div>
+                    <ul class="list-group" id="notifications">
+                    <!--<a href="#"><li class="list-group-item">Code Club Website</li></a>-->
+                    </ul>
+                </div>
+                </div>
+        </div>
+        <script>loadNotifications()</script>
+    </body>
+</html> 
