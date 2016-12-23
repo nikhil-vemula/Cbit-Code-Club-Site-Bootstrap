@@ -1,8 +1,9 @@
+
 function loadNotifications()
 { 
     var loaded;
-    var starCountRef = firebase.database().ref('/Notifications/');
-    starCountRef.on('value', function(snapshot) {
+    var dbRef = firebase.database().ref('/notifications/');
+    dbRef.on('value', function(snapshot) {
       $("#loading").hide();
       console.log(snapshot.val());
       var item,container,badge,card,cardblock,tag;
@@ -27,4 +28,72 @@ function loadNotifications()
       });
     });
     
+}
+function loadPost()
+{
+  var dbRef = firebase.database().ref('/notifications/');
+  dbRef.on('value', function(snapshot) {
+    if(snapshot.val() != null)
+      $("#test").text(snapshot.val()["4"]["content"]);
+  });
+}
+function login()
+{
+  $("#loading").css("display","block");
+  var email = $("#email").val();
+  var pwd = $("#pwd").val();
+  firebase.auth().signInWithEmailAndPassword(email,pwd)
+  .then(function(){
+    post();
+    $("#loading").css("display","none");
+  })
+  .catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    alert(errorMessage);
+    $("#loading").css("display","none");
+  });
+}
+function logout()
+{
+  firebase.auth().signOut().then(function() {
+    alert("Posted!!");
+    $('#summernote').summernote('code', '');
+  }, function(error) {
+    // An error happened.
+  });
+}
+function post(){
+  if(firebase.auth().currentUser!=null){
+     var text = $('#summernote').summernote('code');
+     var tag = $('#sel').val();
+     var ref = firebase.database().ref('/notifications/');
+     ref.push().set({
+       content: text,
+       tag: tag,
+     });
+      logout();
     }
+    else{
+
+    }
+}
+function check()
+{
+  if($("#email").val()==""){
+    alert("email can not be empty");
+    console.log("jfslkdj");
+  }
+  else if($("#pwd").val()==""){
+    alert("password can not be empty");
+  }
+  else if($('#summernote').summernote('isEmpty')){
+    alert("Post cant be empty");
+  }
+  else if($("#sel").val()=="select"){
+    alert("Select Tag");
+  }else{
+    login();
+  }
+}

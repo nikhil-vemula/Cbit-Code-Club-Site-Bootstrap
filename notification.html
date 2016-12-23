@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cbit Code Club</title>
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script> 
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+  <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
+  <link href="./css/reload.css" rel="stylesheet">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
+  <script src="./js/script.js" ></script>
+  <script> 
+  // Initialize Firebase
+  var config = {
+       apiKey: "AIzaSyDyQpXUcCDBtBvfGBpVDCeJa_eAQ2x-LTg",
+       authDomain: "cccnotify-21a8d.firebaseapp.com",
+       databaseURL: "https://cccnotify-21a8d.firebaseio.com",
+       storageBucket: "cccnotify-21a8d.appspot.com",
+       messagingSenderId: "1098197702761"
+    };
+    firebase.initializeApp(config);
+    var database = firebase.database();
+    firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+        //console.log("logged in");
+    } else {
+        //console.log("no user logged in");
+    }
+    });
+    </script>
+</head>
+<body>
+<div class="jumbotron">
+    <h2 class="text-center">Notification adder</h2>
+</div>
+<div class="container">
+    <form>
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" id="email">
+    </div>
+    <div class="form-group">
+        <label for="pwd">Password:</label>
+        <input type="password" class="form-control" id="pwd">
+    </div>
+    </form>
+</div>
+<div class="container">
+  <div id="summernote" ><p>Enter post..</p></div>
+  <div class="form-group">
+  <label for="sel1">Tag:</label>
+  <select class="form-control" id="sel">
+    <option value="select">Select</option>
+    <option value="android">android</option>
+    <option value="web">web</option>
+    <option value="ccc">General Notification</option>
+  </select>
+</div>
+  <button class="btn btn-primary" onclick="check()">Post</button>
+  <div id="loading" class='uil-reload-css' style='-webkit-transform:scale(0.2);display:none;'><div></div></div>
+
+</div>
+  <script>
+    $(document).ready(function() {
+        $('#summernote').summernote({
+            height: 100,                 // set editor height
+            minHeight: null,             // set minimum height of editor
+            maxHeight: null,             // set maximum height of editor
+            focus: true                  // set focus to editable area after initializing summernote
+            });
+    });
+  </script>
+</body>
+</html>
