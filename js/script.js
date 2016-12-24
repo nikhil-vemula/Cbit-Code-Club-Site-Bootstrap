@@ -2,16 +2,17 @@
 function loadNotifications()
 { 
     var loaded;
-    var dbRef = firebase.database().ref('/notifications/');
+    var dbRef = firebase.database().ref('/notifications/').limitToLast(10).orderByPriority();
     dbRef.on('value', function(snapshot) {
       $("#loading").hide();
-      console.log(snapshot.val());
+      $("#notifications").empty();
       var item,container,badge,card,cardblock,tag;
       $.each(snapshot.val(), function( index, value) {
         container = $("<div></div>");
         card = $("<div></div>").attr('class','card');
         cardblock = $("<div></div>").attr('class','card-block');
-        item= $("<p></p>").html(value["content"]).text();
+        text= $("<p></p>").text(value["content"]);
+        title = $("<h2></h2>").text(value["title"]);
         tag = value["tag"];
         if(tag=="ccc")
           badge = $("<span></span>").attr('class','tag tag-primary tag-default').text(value["tag"]);
@@ -21,7 +22,9 @@ function loadNotifications()
           badge = $("<span></span>").attr('class','tag tag-warning tag-default').text(value["tag"]);          
         container.append(badge);
         container.append($('<br/>'));
-        container.append(item);
+        container.append(title);
+        container.append($('<br/>'));        
+        container.append(text);
         cardblock.append(container);
         card.append(cardblock);
         $("#notifications").append(card);
@@ -67,12 +70,14 @@ function logout()
 function post(){
   if(firebase.auth().currentUser!=null){
      var text = $('#summernote').summernote('code');
+     var title = $('#title').val();
      var tag = $('#sel').val();
      var ref = firebase.database().ref('/notifications/');
-     ref.push().set({
+     ref.push().setWithPriority({
        content: text,
        tag: tag,
-     });
+       title: title
+     },-$.now());
       logout();
     }
     else{
@@ -84,6 +89,9 @@ function check()
   if($("#email").val()==""){
     alert("email can not be empty");
     console.log("jfslkdj");
+  }
+  else if($("#title").val()==""){
+    alert("Title can not be empty");
   }
   else if($("#pwd").val()==""){
     alert("password can not be empty");
