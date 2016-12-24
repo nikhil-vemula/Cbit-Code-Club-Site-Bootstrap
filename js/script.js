@@ -2,7 +2,7 @@
 function loadNotifications()
 { 
     var loaded;
-    var dbRef = firebase.database().ref('/notifications/').limitToLast(10).orderByPriority();
+    var dbRef = firebase.database().ref('/notifications/').limitToFirst(10).orderByPriority();
     dbRef.on('value', function(snapshot) {
       $("#loading").hide();
       $("#notifications").empty();
