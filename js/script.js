@@ -11,7 +11,7 @@ function loadNotifications()
         container = $("<div></div>");
         card = $("<div></div>").attr('class','card');
         cardblock = $("<div></div>").attr('class','card-block');
-        text= $("<p></p>").text(value["content"]);
+        text= $("<p></p>").html(value["content"]).text();
         title = $("<h2></h2>").text(value["title"]);
         tag = value["tag"];
         if(tag=="ccc")

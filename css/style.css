@@ -1,6 +1,12 @@
 body{
   background-color: #dcdcdc;
 }
+.youtube{
+  padding:0px;
+}
+.news{
+  padding: 0px;
+}
 .tag{
   font-size: 15px;
 }
@@ -33,8 +39,8 @@ div.header{
 }
 .card {
   padding: 0px;
-   min-width: 300px;
-   margin: 10px 10px 10px 10px;
+  min-width: 300px;
+
 }
 div.title{
   display: flex;

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Post</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="./webscript.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
+  <script> 
+  // Initialize Firebase
+  var config = {
+       apiKey: "AIzaSyDyQpXUcCDBtBvfGBpVDCeJa_eAQ2x-LTg",
+       authDomain: "cccnotify-21a8d.firebaseapp.com",
+       databaseURL: "https://cccnotify-21a8d.firebaseio.com",
+       storageBucket: "cccnotify-21a8d.appspot.com",
+       messagingSenderId: "1098197702761"
+    };
+    firebase.initializeApp(config);
+    var database = firebase.database();
+    firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+        console.log("logged in");
+    } else {
+        console.log("no user logged in");
+    }
+    });
+    </script>
+</head>
+<body>
+  
+<div class="container">
+<div class="jumbotron">
+  <form class="form-horizontal">
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="email">Email:</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" id="email" placeholder="Enter email">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="pwd">Password:</label>
+    <div class="col-sm-10"> 
+      <input type="password" class="form-control" id="pwd" placeholder="Enter password">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="title">Title:</label>
+    <div class="col-sm-10"> 
+      <input type="text" class="form-control" id="title" placeholder="Enter title">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="desc">Description:</label>
+    <div class="col-sm-10"> 
+      <input type="text" class="form-control" id="desc" placeholder="Enter description">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="url">Url:</label>
+    <div class="col-sm-10"> 
+      <input type="text" class="form-control" id="url" placeholder="Enter url">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="url">Topic:</label>
+    <div class="col-sm-10"> 
+    <select class="form-control" id="sel">
+    <option value="select">Select</option>
+    <option value="html">Html,css and java script</option>
+    <option value="bootstrap">BootStrap</option>
+    </select>
+    </div>
+  <div class="form-group text-center"> 
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="button" onclick="check()" class="btn btn-default">Post</button>
+    </div>
+  </div>
+</form>      
+</div>   
+</div>
+
+</body>
+</html>
